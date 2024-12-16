@@ -4,21 +4,21 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
-import { ListGamesComponent } from './features/games/list-games/list-games.component'
+import { provideHttpClient } from '@angular/common/http';
+import { GamesModule } from './features/games/games.module';
+import { RouterOutlet } from '@angular/router';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ListGamesComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    GamesModule,
   ],
-  providers: [],
+  providers: [provideHttpClient()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

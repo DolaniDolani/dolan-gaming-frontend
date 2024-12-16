@@ -1,1 +1,35 @@
-<p>list-games works!</p>
+<div class="container">
+    <h1>Lista Giochi</h1>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Condizione</th>
+          <th>Console</th>
+          <th>Lingua</th>
+          <th>Data Acquisto</th>
+          <th>Prezzo Acquisto</th>
+          <th>Data Vendita</th>
+          <th>Prezzo Vendita</th>
+          <th>Azioni</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let game of games">
+          <td>{{ game.name }}</td>
+          <td>{{ game.condition }}</td>
+          <td>{{ game.console }}</td>
+          <td>{{ game.language }}</td>
+          <td>{{ game.purchaseDate | date }}</td>
+          <td>{{ game.purchasePrice | currency }}</td>
+          <td>{{ game.saleDate | date }}</td>
+          <td>{{ game.salePrice | currency }}</td>
+          <td>
+            <button class="btn btn-primary btn-sm" (click)="editGame(game.id)">Modifica</button>
+            <button class="btn btn-danger btn-sm" (click)="deleteGame(game.id)">Elimina</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
