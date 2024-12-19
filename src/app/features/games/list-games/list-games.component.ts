@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Game, GamesService } from '../games.service';
+import { CommonModule, NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-list-games',
-  standalone: false,
   templateUrl: './list-games.component.html',
-  styleUrls: ['./list-games.component.scss']
+  styleUrls: ['./list-games.component.scss'],
+  imports: [
+    CommonModule]
 })
 export class ListGamesComponent implements OnInit {
   games: Game[] = []

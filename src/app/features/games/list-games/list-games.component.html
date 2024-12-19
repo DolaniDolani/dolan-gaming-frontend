@@ -1,4 +1,5 @@
 <div class="container">
+  ciaocpipo
     <h1>Lista Giochi</h1>
     <table class="table table-striped">
       <thead>
@@ -20,10 +21,10 @@
           <td>{{ game.condition }}</td>
           <td>{{ game.console }}</td>
           <td>{{ game.language }}</td>
-          <td>{{ game.purchaseDate | date }}</td>
-          <td>{{ game.purchasePrice | currency }}</td>
-          <td>{{ game.saleDate | date }}</td>
-          <td>{{ game.salePrice | currency }}</td>
+          <td>{{ game.purchaseDate  }}</td>
+          <td>{{ game.purchasePrice  }}</td>
+          <td>{{ game.saleDate }}</td>
+          <td>{{ game.salePrice }}</td>
           <td>
             <button class="btn btn-primary btn-sm" (click)="editGame(game.id)">Modifica</button>
             <button class="btn btn-danger btn-sm" (click)="deleteGame(game.id)">Elimina</button>
