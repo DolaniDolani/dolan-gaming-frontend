@@ -10,8 +10,8 @@ export interface Game {
   console: string
   language: string
   notes?: string
-  purchaseDate: Date
-  purchasePrice: number
+  purchase_date: Date
+  purchase_price: number
   saleDate: Date
   salePrice: number
 }
