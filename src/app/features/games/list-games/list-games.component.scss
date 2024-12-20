@@ -34,13 +34,20 @@ h1 {
 .btn-primary {
   background-color: #007bff;
   border: none;
+  margin-bottom: 4px;
+  width: 5vw;
 }
 
 .btn-danger {
   background-color: #dc3545;
   border: none;
+  width: 5vw;
 }
 
 .btn-primary:hover, .btn-danger:hover {
   opacity: 0.9;
+}
+
+.td-actions{
+    text-align: center;
 }

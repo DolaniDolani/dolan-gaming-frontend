@@ -1,7 +1,7 @@
 <div class="container my-4">
   <h1 class="text-center mb-4">Lista Giochi</h1>
   <div class="table-responsive">
-    <table class="table table-hover table-striped table-bordered align-middle">
+    <table class="table table-hover table-bordered align-middle">
       <thead class="table-dark">
         <tr>
           <th>Nome</th>
@@ -25,9 +25,9 @@
           <td>{{ game.purchase_price | currency:'EUR':'symbol' }}</td>
           <td>{{ game.saleDate | date: 'dd/MM/yyyy' }}</td>
           <td>{{ game.salePrice | currency:'EUR':'symbol' }}</td>
-          <td>
-            <button class="btn btn-primary btn-sm me-2" (click)="editGame(game.id)">Modifica</button>
-            <button class="btn btn-danger btn-sm" (click)="deleteGame(game.id)">Elimina</button>
+          <td class="td-actions">
+            <button class="btn btn-primary" (click)="editGame(game.id)">Modifica</button>
+            <button class="btn btn-danger" (click)="deleteGame(game.id)">Elimina</button>
           </td>
         </tr>
       </tbody>
