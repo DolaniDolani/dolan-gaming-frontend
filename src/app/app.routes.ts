@@ -5,4 +5,7 @@ export const routes: Routes = [
     { path: 'games', 
         loadChildren: () => 
             import('./features/games/games.routes').then(m => m.routes)},
+    { path: 'purchases',
+        loadChildren: () =>
+            import('./features/purchases/purchases.routes').then(m => m.routes)},
 ];

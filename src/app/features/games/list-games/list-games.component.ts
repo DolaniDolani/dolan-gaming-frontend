@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Game, GamesService } from '../games.service';
-import { CommonModule, NgFor } from '@angular/common';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-list-games',
@@ -12,7 +12,9 @@ import { CommonModule, NgFor } from '@angular/common';
 export class ListGamesComponent implements OnInit {
   games: Game[] = []
 
-  constructor(private gameService: GamesService) { }
+  constructor(
+    private gameService: GamesService
+  ) { }
 
   ngOnInit(): void {
     this.loadGames()
@@ -21,7 +23,7 @@ export class ListGamesComponent implements OnInit {
   loadGames() {
     this.gameService.getAllGames().subscribe(
       (data) => (this.games = data),
-      (error) => console.error('Error during game fetching:', error)
+      (error) => console.error('Error during game fetching: ', error)
     )
   }
 
