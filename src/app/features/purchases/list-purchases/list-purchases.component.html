@@ -4,7 +4,6 @@
       <table class="table table-hover table-bordered align-middle">
         <thead class="table-dark">
           <tr>
-            <th>ID</th>
             <th>Nome</th>
             <th>Data</th>
             <th>Costo</th>
@@ -13,14 +12,27 @@
         </thead>
         <tbody>
           <tr *ngFor="let purchase of purchases">
-            <td>{{ purchase.id }}</td>
-            <td>{{ purchase.name }}</td>
-            <td>{{ purchase.date | date: 'dd/MM/yyyy' }}</td>
-            <td>{{ purchase.cost | currency:'EUR':'symbol' }}</td>
-            <td>{{ purchase.notes }}</td>
+            <td>
+              <span *ngIf="!isRowEditableByID[purchase.id]">{{ purchase.name }}</span>
+              <input *ngIf="isRowEditableByID[purchase.id]" [(ngModel)]="purchase.name" type="text" class="form-control"/>
+            </td>
+            <td>
+              <span *ngIf="!isRowEditableByID[purchase.id]"> {{ purchase.date | date: 'dd/MM/yyyy' }} </span>
+              <input *ngIf="isRowEditableByID[purchase.id]" [(ngModel)]="purchase.date" (input)="purchase.date = formatDate($event)" type="date" class="form-control"/>
+            </td>
+            <td>
+              <span *ngIf="!isRowEditableByID[purchase.id]"> {{ purchase.cost | currency: 'EUR' }} </span>
+              <input *ngIf="isRowEditableByID[purchase.id]" [(ngModel)]="purchase.cost" type="number" class="form-control"/>
+            </td>
+            <td> 
+              <span *ngIf="!isRowEditableByID[purchase.id]">{{ purchase.notes }}</span>
+              <input *ngIf="isRowEditableByID[purchase.id]" [(ngModel)]="purchase.notes" type="text" class="form-control"/>
+            </td>
             <td class="td-actions">
-              <button class="btn btn-primary"  >Modifica</button>
-              <button class="btn btn-danger"  >Elimina</button>
+              <button *ngIf="!isRowEditableByID[purchase.id]" class="btn btn-primary" (click)="editRow(purchase.id)">Modifica</button>
+              <button *ngIf="!isRowEditableByID[purchase.id]" class="btn btn-danger" (click)="deletePurchase(purchase.id)">Elimina</button>
+              <button *ngIf="isRowEditableByID[purchase.id]" class="btn btn-success" (click)="saveRow(purchase)">Salva</button>
+              <button *ngIf="isRowEditableByID[purchase.id]" class="btn btn-secondary" (click)="cancelEdit(purchase.id)">Annulla</button>
             </td>
           </tr>
         </tbody>

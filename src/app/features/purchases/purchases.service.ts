@@ -7,7 +7,7 @@ import { environment } from '../../../environments/environment';
 export interface Purchase {
   id: number
   name: string
-  date: Date
+  date: string //date is a string to use ISO format
   cost: number
   notes: string
   games: Game[]
