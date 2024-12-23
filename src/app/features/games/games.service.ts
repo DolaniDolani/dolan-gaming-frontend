@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
-export interface Game {
+export class Game {
   id: number
   name: string
   condition: string
@@ -11,9 +11,20 @@ export interface Game {
   language: string
   notes?: string
   purchase_date: Date
-  purchase_price: number
-  saleDate: Date
-  salePrice: number
+  saleDate: Date | null
+  salePrice: number | null
+
+  constructor() {
+    this.id = 0;
+    this.name = '';
+    this.condition = '';
+    this.console = '';
+    this.language = '';
+    this.notes = '';
+    this.purchase_date = new Date();
+    this.saleDate = null;
+    this.salePrice = null;
+  }
 }
 
 @Injectable({

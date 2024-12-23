@@ -2,13 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Purchase, PurchasesService } from '../purchases.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AddPurchaseComponent } from "../add-purchase/add-purchase.component";
 
 @Component({
   selector: 'app-list-purchases',
   imports: [
     CommonModule,
-    FormsModule
-  ],
+    FormsModule,
+    AddPurchaseComponent
+],
   templateUrl: './list-purchases.component.html',
   styleUrl: './list-purchases.component.scss'
 })
@@ -51,10 +53,14 @@ export class ListPurchasesComponent implements OnInit{
 
   deletePurchase(id: number) {
     this.purchaseService.deletePurchase(id).subscribe(
-      (data) => alert('Purchase deleted succesfully'),
+      (data) => {
+        alert('Purchase deleted succesfully');
+        this.loadPurchases()
+      },
 
       (error) => console.error('Error while deleting purchase: ', error)
     )
+    
   }
 
   saveRow(purchase: Purchase) {
