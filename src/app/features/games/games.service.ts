@@ -11,8 +11,8 @@ export class Game {
   language: string
   notes?: string
   purchase_date: Date
-  saleDate: Date | null
-  salePrice: number | null
+  sale_date: Date | null
+  sale_price: number | null
 
   constructor() {
     this.id = 0;
@@ -22,8 +22,8 @@ export class Game {
     this.language = '';
     this.notes = '';
     this.purchase_date = new Date();
-    this.saleDate = null;
-    this.salePrice = null;
+    this.sale_date = null;
+    this.sale_price = null;
   }
 }
 

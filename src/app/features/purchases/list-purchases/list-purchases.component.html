@@ -7,11 +7,12 @@
             <th>Nome</th>
             <th>Data</th>
             <th>Costo</th>
+            <th>Ricavi</th>
             <th>Note</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let purchase of purchases">
+          <tr *ngFor="let purchase of purchases; let i = index">
             <td>
               <span *ngIf="!isRowEditableByID[purchase.id]">{{ purchase.name }}</span>
               <input *ngIf="isRowEditableByID[purchase.id]" [(ngModel)]="purchase.name" type="text" class="form-control"/>
@@ -24,11 +25,15 @@
               <span *ngIf="!isRowEditableByID[purchase.id]"> {{ purchase.cost | currency: 'EUR' }} </span>
               <input *ngIf="isRowEditableByID[purchase.id]" [(ngModel)]="purchase.cost" type="number" class="form-control"/>
             </td>
+            <td>
+              <span>{{revenues[i] | currency: 'EUR' }}</span>
+            </td>
             <td> 
               <span *ngIf="!isRowEditableByID[purchase.id]">{{ purchase.notes }}</span>
               <input *ngIf="isRowEditableByID[purchase.id]" [(ngModel)]="purchase.notes" type="text" class="form-control"/>
             </td>
             <td class="td-actions">
+              <button *ngIf="!isRowEditableByID[purchase.id]" class="btn btn-info" [routerLink]="['/purchases', purchase.id]">Dettagli</button>
               <button *ngIf="!isRowEditableByID[purchase.id]" class="btn btn-primary" (click)="editRow(purchase.id)">Modifica</button>
               <button *ngIf="!isRowEditableByID[purchase.id]" class="btn btn-danger" (click)="deletePurchase(purchase.id)">Elimina</button>
               <button *ngIf="isRowEditableByID[purchase.id]" class="btn btn-success" (click)="saveRow(purchase)">Salva</button>
@@ -37,8 +42,8 @@
           </tr>
         </tbody>
       </table>
-      <div id="add-icon" data-bs-toggle="modal" data-bs-target="#addPurchaseModal">
-        <button class="btn btn-success"><b > Aggiungi acquisto</b> </button>
+      <div id="add-icon" >
+        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addPurchaseModal"><b> Aggiungi acquisto</b> </button>
       </div>
       
     </div>

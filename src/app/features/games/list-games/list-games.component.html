@@ -21,8 +21,8 @@
           <td>{{ game.console }}</td>
           <td>{{ game.language }}</td>
           <td>{{ game.purchase_date | date: 'dd/MM/yyyy' }}</td>
-          <td>{{ game.saleDate | date: 'dd/MM/yyyy' }}</td>
-          <td>{{ game.salePrice | currency:'EUR':'symbol' }}</td>
+          <td>{{ game.sale_date | date: 'dd/MM/yyyy' }}</td>
+          <td>{{ game.sale_price | currency:'EUR':'symbol' }}</td>
           <td class="td-actions">
             <button class="btn btn-primary" (click)="editGame(game.id)">Modifica</button>
             <button class="btn btn-danger" (click)="deleteGame(game.id)">Elimina</button>

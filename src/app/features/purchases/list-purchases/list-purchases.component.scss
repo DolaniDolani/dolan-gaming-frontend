@@ -31,18 +31,15 @@ h1 {
 }
 
 /* Pulsanti azioni */
-.btn-primary {
+.btn-primary, .btn-info, .btn-success{
  
   border: none;
   margin-bottom: 4px;
 
 }
 
-.btn-success {
-  margin-bottom: 4px;
-}
 
-.btn-primary:hover, .btn-danger:hover {
+.btn-primary:hover, .btn-danger:hover, .btn-info:hover{
   opacity: 0.9;
 }
 

@@ -1,0 +1,106 @@
+<div class="container my-4" *ngIf="!isLoading">
+  <div *ngIf="error; else content">
+    <div class="alert alert-danger">{{ error }}</div>
+  </div>
+
+  <ng-template #content>
+    <h2>Dettagli Acquisto</h2>
+    <form *ngIf="purchase">
+      <div class="mb-3">
+        <label for="name" class="form-label">Nome Acquisto</label>
+        <input
+          type="text"
+          id="name"
+          class="form-control"
+          [(ngModel)]="purchase.name"
+          name="name"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="date" class="form-label">Data</label>
+        <input
+          type="date"
+          id="date"
+          class="form-control"
+          [(ngModel)]="purchase.date"
+          name="date"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="cost" class="form-label">Costo Totale</label>
+        <input
+          type="number"
+          id="cost"
+          class="form-control"
+          [(ngModel)]="purchase.cost"
+          name="cost"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="notes" class="form-label">Note</label>
+        <textarea
+          id="notes"
+          class="form-control"
+          [(ngModel)]="purchase.notes"
+          name="notes"
+        ></textarea>
+      </div>
+    </form>
+
+    <h3 class="mt-4" *ngIf="purchase?.games">Giochi Associati</h3>
+    <table class="table table-striped" *ngIf="purchase?.games">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Condizione</th>
+          <th>Console</th>
+          <th>Lingua</th>
+          <th>Data Acquisto</th>
+          <th>Data Vendita</th>
+          <th>Prezzo Vendita</th>
+          <th>Azioni</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let game of purchase.games; let i = index">
+          <td><input [(ngModel)]="game.name" name="name{{ i }}" class="form-control" /></td>
+          <td><input [(ngModel)]="game.condition" name="condition{{ i }}" class="form-control" /></td>
+          <td><input [(ngModel)]="game.console" name="console{{ i }}" class="form-control" /></td>
+          <td><input [(ngModel)]="game.language" name="language{{ i }}" class="form-control" /></td>
+          <td>
+  <input
+    type="date"
+    class="form-control"
+    [value]="convertDateToInputFormat(game.purchase_date)"
+    (input)="updateDate($event, game, 'purchase_date')"
+    name="purchaseDate{{ i }}"
+  />
+</td>
+<td>
+  <input
+    type="date"
+    class="form-control"
+    [value]="convertDateToInputFormat(game.sale_date)"
+    (input)="updateDate($event, game, 'sale_date')"
+    name="sale_date{{ i }}"
+  />
+</td>
+
+          <td><input [(ngModel)]="game.sale_price" name="sale_price{{ i }}" type="number" class="form-control" min="0" /></td>
+          <td>
+            <button class="btn btn-danger btn-sm" (click)="removeGame(i)">Rimuovi</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <button class="btn btn-success" (click)="addGame()">Aggiungi Gioco</button>
+    <button class="btn btn-primary w-100 mt-3" (click)="saveChanges()">Salva Modifiche</button>
+  </ng-template>
+
+  <ng-template #loading>
+    <div class="text-center my-4">
+      <div class="spinner-border" role="status"></div>
+    </div>
+  </ng-template>
+</div>

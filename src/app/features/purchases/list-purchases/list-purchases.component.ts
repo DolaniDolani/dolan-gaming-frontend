@@ -3,19 +3,22 @@ import { Purchase, PurchasesService } from '../purchases.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AddPurchaseComponent } from "../add-purchase/add-purchase.component";
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-list-purchases',
   imports: [
     CommonModule,
     FormsModule,
-    AddPurchaseComponent
+    AddPurchaseComponent,
+    RouterModule
 ],
   templateUrl: './list-purchases.component.html',
   styleUrl: './list-purchases.component.scss'
 })
 export class ListPurchasesComponent implements OnInit{
   purchases: Purchase[] = []
+  revenues: number[] = []
   isRowEditableByID: { [key: number]: boolean} = {}
 
   constructor(
@@ -25,23 +28,26 @@ export class ListPurchasesComponent implements OnInit{
   ngOnInit(): void {
     this.loadPurchases()
     console.log("ngOnInit")
-    console.log( this.purchases)
+    console.log(this.purchases)
   }
 
-  printa(): void {
-    console.log( this.purchases)
-    this.purchases.forEach((purchase) => {
-      if (purchase.date) {
-        // Trasforma la data ISO in yyyy-MM-dd per il datepicker
-        purchase.date = new Date(purchase.date).toISOString().split('T')[0];
-      }
-    });
-    
+  calculateRevenue(): void {
+    this.purchases.forEach((value: Purchase, index: number) => {
+      this.revenues[index] = 0
+      value.games.forEach( (value) => {
+        if(value.sale_price != null){
+          this.revenues[index] += value.sale_price
+        }
+      })
+    })
   }
 
   loadPurchases() {
     this.purchaseService.getAllPurchases().subscribe(
-      (data) => (this.purchases = data),
+      (data) => {
+        (this.purchases = data)
+        this.calculateRevenue()
+      },
 
       (error) => console.error('Error during purchase fetching: ', error)
     )
@@ -64,7 +70,7 @@ export class ListPurchasesComponent implements OnInit{
   }
 
   saveRow(purchase: Purchase) {
-    this.purchaseService.updatePurchase(purchase.id, purchase).subscribe(
+    this.purchaseService.updatePurchase(purchase).subscribe(
       (data) => alert('Purchase updated successfully'),
       (error) => console.error('Error while updating purchase')
     )

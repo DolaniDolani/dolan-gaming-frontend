@@ -38,15 +38,19 @@ export class PurchasesService {
   constructor(private http: HttpClient) { }
 
   getAllPurchases(): Observable<Purchase[]> {
-    return this.http.get<Purchase[]>(this.baseUrl)
+    return this.http.get<Purchase[]>(this.baseUrl);
+  }
+
+  getPurchaseById(id: number): Observable<Purchase> {
+    return this.http.get<Purchase>(`${this.baseUrl}/${id}`);
   }
 
   addPurchase(purchase: Purchase): Observable<Purchase> {
     return this.http.post<Purchase>(`${this.baseUrl}/add`, purchase);
   }
 
-  updatePurchase(id: number, purchase: Purchase): Observable<Purchase> {
-    return this.http.put<Purchase>(`${this.baseUrl}/${id}`, purchase);
+  updatePurchase(purchase: Purchase): Observable<Purchase> {
+    return this.http.put<Purchase>(`${this.baseUrl}/${purchase.id}`, purchase);
   }
 
   deletePurchase(id: number): Observable<void> {
